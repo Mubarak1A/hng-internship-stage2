@@ -21,9 +21,12 @@ export class AuthService {
 
   async login(user: any) {
     const payload = { email: user.email, sub: user.userId };
-    return {
-      accessToken: this.jwtService.sign(payload),
-      user: user,
-    };
+    try {
+      const accessToken = this.jwtService.sign(payload);
+      return { accessToken, user }; // Include user object without password
+    } catch (err) {
+      console.error('Error signing JWT:', err);
+      throw new Error('Internal Server Error'); // Handle JWT signing error
+    }
   }
 }

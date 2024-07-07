@@ -4,7 +4,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Organisation } from './organisation.entity';
 import { User } from 'src/users/user.entity';
 
-@Controller('organisations')
+@Controller('api/organisations')
 export class OrganisationsController {
   constructor(private organisationsService: OrganisationsService) {}
 
@@ -46,7 +46,7 @@ export class OrganisationsController {
   @UseGuards(JwtAuthGuard)
   @Post(':orgId/users')
   async addUserToOrganisation(@Param('orgId') orgId: string, @Body() body: { userId: string }) {
-    const organisation = await this.organisationsService.addUserToOrganisation(orgId, { userId: body.userId } as User);
+    const organisation = await this.organisationsService.addUserToOrganisation(orgId, body.userId);
     return {
       status: 'success',
       message: 'User added to organisation successfully',

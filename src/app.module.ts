@@ -23,7 +23,7 @@ import { Organisation } from './organisations/organisation.entity';
         ssl: configService.get<string>('DB_URL').includes('ssl=true')
           ? { rejectUnauthorized: false }
           : false,
-        entities: [User, Organisation],
+          entities: [User, Organisation],
         synchronize: true,
       }),
       inject: [ConfigService],

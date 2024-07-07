@@ -14,10 +14,13 @@ export class AuthController {
     private organisationsService: OrganisationsService,
   ) {}
 
-  @UseGuards(LocalAuthGuard)
+  //@UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req) {
-    return this.authService.login(req.user);
+    if (!req.body) {
+      return { statusCode: 401, message: 'Unauthorized' };
+    }
+    return this.authService.login(req.body);
   }
 
   @Post('register')
