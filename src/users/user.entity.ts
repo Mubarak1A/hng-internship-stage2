@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToMany } from 'typeorm';
 import { IsEmail, IsNotEmpty } from 'class-validator';
-//import { Organisation } from '../organisations/organisation.entity';
+import { Organisation } from '../organisations/organisation.entity';
 
 @Entity()
 @Unique(['userId', 'email'])
@@ -28,6 +28,6 @@ export class User {
   @Column({ nullable: true })
   phone: string;
 
-  //@ManyToMany(() => Organisation, (organisation) => organisation.users)
-  //organisations: Organisation[];
+  @ManyToMany(() => Organisation, (organisation) => organisation.users)
+  organisations: Organisation[];
 }
